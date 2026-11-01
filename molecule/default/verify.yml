@@ -16,4 +16,6 @@
       assert:
         that:
           - "'Hello from Ansible!' in nginx_page.stdout"
-          - "'This webpage was deployed using a reusable Ansible role.' in nginx_page.stdout"
+          - >-
+            'This webpage was deployed using a reusable Ansible role.'
+            in nginx_page.stdout
