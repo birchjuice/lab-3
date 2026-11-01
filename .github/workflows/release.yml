@@ -8,7 +8,7 @@ name: Release
 
 jobs:
   release:
-    name: Create GitHub Release
+    name: Create github release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,12 +17,13 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v4
 
-      - name: Package Ansible role
+      - name: Package ansible role
         run: |
+          cd ..
           tar --exclude='.git*' \
-            -czf lab-3-${{ github.ref_name }}.tar.gz .
+            -czf lab-3-${{ github.ref_name }}.tar.gz lab-3/
 
-      - name: Create GitHub Release
+      - name: Create github release
         uses: softprops/action-gh-release@v1
         with:
           files: lab-3-${{ github.ref_name }}.tar.gz

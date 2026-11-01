@@ -11,14 +11,14 @@ name: CI
 
 jobs:
   test:
-    name: Lint and test Ansible role
+    name: Lint and test ansible role
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -33,7 +33,7 @@ jobs:
             molecule \
             "molecule-plugins[docker]"
 
-      - name: Install Ansible collections
+      - name: Install ansible collections
         run: ansible-galaxy collection install community.docker
 
       - name: Run yamllint
@@ -42,5 +42,5 @@ jobs:
       - name: Run ansible-lint
         run: ansible-lint
 
-      - name: Run Molecule tests
+      - name: Run molecule tests
         run: molecule test
