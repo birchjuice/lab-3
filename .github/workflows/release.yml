@@ -1,0 +1,33 @@
+---
+name: Release
+
+'on':
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v4
+
+      - name: Package Ansible role
+        run: |
+          tar --exclude='.git*' \
+            -czf lab-3-${{ github.ref_name }}.tar.gz .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: lab-3-${{ github.ref_name }}.tar.gz
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
