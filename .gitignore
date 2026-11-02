@@ -2,3 +2,8 @@
 .ansible/
 __pycache__/
 *.py[cod]
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.pem
+example/ansible/roles/

@@ -1,0 +1,9 @@
+---
+- name: Configure web server
+  hosts: web_servers
+  become: true
+
+  roles:
+    - role: birchjuice.nginx
+      nginx_page_title: "Hello from Lab 3!"
+      nginx_page_message: "This server uses a released Ansible role."

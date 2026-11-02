@@ -1,21 +1,29 @@
 ---
 - name: Install nginx
   apt:
-    name: "{{ nginx_package_name }}"
+    name: nginx
     state: present
     update_cache: true
     cache_valid_time: 3600
 
-- name: Ensure nginx is enabled and running
-  service:
-    name: "{{ nginx_service_name }}"
-    state: started
-    enabled: true
+- name: Create website document root
+  file:
+    path: "{{ nginx_document_root }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
 
 - name: Deploy website
   template:
     src: index.html.j2
-    dest: /var/www/html/index.html
+    dest: "{{ nginx_document_root }}/index.html"
     owner: root
     group: root
     mode: "0644"
+
+- name: Ensure nginx is enabled and running
+  service:
+    name: nginx
+    state: started
+    enabled: true

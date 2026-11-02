@@ -2,13 +2,17 @@
 - name: Verify
   hosts: all
   become: true
+
+  vars_files:
+    - ../../defaults/main.yml
+
   tasks:
     - name: Check that nginx is installed
       command: nginx -v
       changed_when: false
 
     - name: Read the deployed webpage
-      command: cat /var/www/html/index.html
+      command: cat {{ nginx_document_root }}/index.html
       changed_when: false
       register: nginx_page
 

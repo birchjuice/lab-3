@@ -1,6 +1,4 @@
 ---
-nginx_package_name: nginx
-nginx_service_name: nginx
-
 nginx_page_title: "Hello from Ansible!"
 nginx_page_message: "This webpage was deployed using a reusable Ansible role."
+nginx_document_root: /var/www/html
