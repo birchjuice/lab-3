@@ -17,16 +17,21 @@ jobs:
       - name: Check out the codebase
         uses: actions/checkout@v4
 
-      - name: Package ansible role
+      - name: Package Ansible role
         run: |
-          cd ..
-          tar --exclude='.git*' \
-            -czf lab-3-${{ github.ref_name }}.tar.gz lab-3/
+          tar -czf "$RUNNER_TEMP/lab-3-${{ github.ref_name }}.tar.gz" \
+            --transform='s,^,birchjuice.nginx/,' \
+            defaults/ \
+            meta/ \
+            tasks/ \
+            templates/ \
+            README.md \
+            LICENSE
 
       - name: Create github release
         uses: softprops/action-gh-release@v1
         with:
-          files: lab-3-${{ github.ref_name }}.tar.gz
+          files: ${{ runner.temp }}/lab-3-${{ github.ref_name }}.tar.gz
           generate_release_notes: true
           draft: false
           prerelease: false

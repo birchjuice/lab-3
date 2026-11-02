@@ -1,5 +1,4 @@
 ---
 roles:
   - name: birchjuice.nginx
-    src: https://github.com/birchjuice/lab-3.git
-    version: v1.0.0
+    src: https://github.com/birchjuice/lab-3/releases/download/v1.2.0/lab-3-v1.2.0.tar.gz
